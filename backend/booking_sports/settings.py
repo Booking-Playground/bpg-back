@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'playground.apps.PlaygroundConfig',
-    'backend.booking.apps.BookingConfig',
+    'booking.apps.BookingConfig',
 
 ]
 
@@ -88,6 +88,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+AUTH_USER_MODEL = 'users.User'
 
 
 STATIC_URL = '/static/'
