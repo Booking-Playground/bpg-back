@@ -102,13 +102,13 @@ class PlaygroundWriteSerializer(serializers.ModelSerializer):
         ImagePlayground.objects.bulk_create(images_list)
 
     def create(self, validated_data):
-        if 'images' not in self.initial_data:
-            return Playground.objects.create(**validated_data)
-        images = validated_data.pop('images')
-        sports = validated_data.pop('sports')
+        images = validated_data.pop('images', None)
+        sports = validated_data.pop('sports', None)
         playground = Playground.objects.create(**validated_data)
-        playground.sports.set(sports)
-        self.__add_images(playground, images)
+        if sports:
+            playground.sports.set(sports)
+        if images:
+            self.__add_images(playground, images)
         playground.save()
         return playground
 
