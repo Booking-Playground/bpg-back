@@ -21,9 +21,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'playground.apps.PlaygroundConfig',
-    'booking.apps.BookingConfig',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'drf_yasg',
+    'django_cleanup',
 
+    # 3rd party
+    'api.apps.ApiConfig',
+    'booking.apps.BookingConfig',
+    'playground.apps.PlaygroundConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -41,7 +49,7 @@ ROOT_URLCONF = 'booking_sports.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'backend/templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,7 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -92,11 +100,42 @@ USE_TZ = True
 AUTH_USER_MODEL = 'users.User'
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'SERIALIZERS': {
+        'user': 'api.serializers.users.UserReadSerializer',
+        'current_user': 'api.serializers.users.UserReadSerializer',
+        'user_create': 'api.serializers.users.UserRegSerializer',
+    },
+    'PERMISSIONS': {
+        'user': ('rest_framework.permissions.IsAuthenticated',),
+        'user_list': ('rest_framework.permissions.AllowAny',),
+        'password_reset': ('rest_framework.permissions.AllowAny',),
+        'password_reset_confirm': ('rest_framework.permissions.AllowAny',),
+        'set_password': ('rest_framework.permissions.IsAuthenticated',),
+    },
+    'HIDE_USERS': False,
+    'PASSWORD_RESET_CONFIRM_URL': 'api/v1/users/reset_password_confirm/{uid}/{token}',
+}
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
