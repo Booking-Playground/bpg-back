@@ -56,7 +56,7 @@ class PlaygroundReadSerializer(serializers.ModelSerializer):
             'size', 'playground_price', 'address',
             'owner', 'description', 'sports', 'covering',
             'shower', 'changing_rooms', 'lighting', 'parking',
-            'stands', 'playground_slug', 'images',
+            'stands', 'playground_slug', 'images', 'draft',
         )
         model = Playground
 
@@ -86,9 +86,20 @@ class PlaygroundWriteSerializer(serializers.ModelSerializer):
             'size', 'playground_price', 'address',
             'owner', 'description', 'sports', 'covering',
             'shower', 'changing_rooms', 'lighting', 'parking',
-            'stands', 'playground_slug', 'images',
+            'stands', 'playground_slug', 'images', 'draft'
         )
         model = Playground
+
+    def __add_images(self, playground, images):
+        images_list = list()
+        for image in images:
+            images_list.append(
+                ImagePlayground(
+                    playground=playground,
+                    **image,
+                )
+            )
+        ImagePlayground.objects.bulk_create(images_list)
 
     def create(self, validated_data):
         if 'images' not in self.initial_data:
@@ -97,25 +108,18 @@ class PlaygroundWriteSerializer(serializers.ModelSerializer):
         sports = validated_data.pop('sports')
         playground = Playground.objects.create(**validated_data)
         playground.sports.set(sports)
-        for image in images:
-            status = ImagePlayground.objects.get_or_create(
-                **image, playground=playground,
-            )
+        self.__add_images(playground, images)
         playground.save()
         return playground
 
     def update(self, instance, validated_data):
         images = validated_data.get('images')
         sports = validated_data.get('sports')
-        covering = validated_data.get('covering')
         if sports:
             instance.sports.set(sports)
-        if covering:
-            instance.covering = covering
         if images:
             ImagePlayground.objects.filter(playground=instance).delete()
-            for image in images:
-                ImagePlayground.objects.create(playground=instance, **image)
+            self.__add_images(instance, images)
         super().update(instance, validated_data)
         return instance
 
