@@ -1,0 +1,1129 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /api/v1/sports/:
+    get:
+      operationId: listSports
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sport'
+          description: ''
+      tags:
+      - api
+  /api/v1/sports/{id}/:
+    get:
+      operationId: retrieveSport
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sport.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sport'
+          description: ''
+      tags:
+      - api
+  /api/v1/coverings/:
+    get:
+      operationId: listCoverings
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Covering'
+          description: ''
+      tags:
+      - api
+  /api/v1/coverings/{id}/:
+    get:
+      operationId: retrieveCovering
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this covering.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Covering'
+          description: ''
+      tags:
+      - api
+  /api/v1/playgrounds/:
+    get:
+      operationId: listPlaygrounds
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlaygroundRead'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createPlayground
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaygroundWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PlaygroundWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PlaygroundWrite'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaygroundWrite'
+          description: ''
+      tags:
+      - api
+  /api/v1/playgrounds/{id}/:
+    get:
+      operationId: retrievePlayground
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this playground.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaygroundRead'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updatePlayground
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this playground.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaygroundWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PlaygroundWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PlaygroundWrite'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaygroundWrite'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdatePlayground
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this playground.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaygroundWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PlaygroundWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PlaygroundWrite'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaygroundWrite'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyPlayground
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this playground.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/users/:
+    get:
+      operationId: listUsers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserRead'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserReg'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserReg'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserReg'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserReg'
+          description: ''
+      tags:
+      - api
+  /api/v1/users/me/:
+    get:
+      operationId: meUser
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRead'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: meUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRead'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: meUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRead'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: meUser
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/users/{id}/:
+    get:
+      operationId: retrieveUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRead'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRead'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRead'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRead'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/playgrounds/{playground_id}/settings/:
+    get:
+      operationId: listSettingBookings
+      description: ''
+      parameters:
+      - name: playground_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateSettingBooking
+      description: ''
+      parameters:
+      - name: playground_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/v1/users/activation/:
+    post:
+      operationId: activationUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Activation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Activation'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activation'
+          description: ''
+      tags:
+      - api
+  /api/v1/users/resend_activation/:
+    post:
+      operationId: resendActivationUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+      tags:
+      - api
+  /api/v1/users/reset_password/:
+    post:
+      operationId: resetPasswordUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+      tags:
+      - api
+  /api/v1/users/reset_password_confirm/:
+    post:
+      operationId: resetPasswordConfirmUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordResetConfirm'
+          description: ''
+      tags:
+      - api
+  /api/v1/users/reset_email/:
+    post:
+      operationId: resetUsernameUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+      tags:
+      - api
+  /api/v1/users/reset_email_confirm/:
+    post:
+      operationId: resetUsernameConfirmUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernameResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UsernameResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UsernameResetConfirm'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsernameResetConfirm'
+          description: ''
+      tags:
+      - api
+  /api/v1/users/set_password/:
+    post:
+      operationId: setPasswordUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetPassword'
+          description: ''
+      tags:
+      - api
+  /api/v1/users/set_email/:
+    post:
+      operationId: setUsernameUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUsername'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SetUsername'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SetUsername'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUsername'
+          description: ''
+      tags:
+      - api
+  /api/v1/auth/token/login/:
+    post:
+      operationId: createTokenCreate
+      description: Use this endpoint to obtain user authentication token.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenCreate'
+          description: ''
+      tags:
+      - api
+  /api/v1/auth/token/logout/:
+    post:
+      operationId: createTokenDestroy
+      description: Use this endpoint to logout user (remove user authentication token).
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+components:
+  schemas:
+    Sport:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        sport_name:
+          type: string
+          maxLength: 150
+        sport_slug:
+          type: string
+          maxLength: 160
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+      - sport_name
+      - sport_slug
+    Covering:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        covering_name:
+          type: string
+          maxLength: 150
+        covering_slug:
+          type: string
+          maxLength: 160
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+      - covering_name
+      - covering_slug
+    PlaygroundRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        playground_name:
+          type: string
+          maxLength: 150
+        playground_type:
+          enum:
+          - Indoor
+          - Outdoor
+          type: string
+        size:
+          type: string
+          maxLength: 50
+        playground_price:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 100000
+          minimum: -100000
+        address:
+          type: string
+          maxLength: 150
+        owner:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            email:
+              type: string
+              format: email
+              maxLength: 250
+            phone:
+              type: integer
+            first_name:
+              type: string
+              maxLength: 150
+            last_name:
+              type: string
+              maxLength: 150
+          required:
+          - email
+          - phone
+          - first_name
+          - last_name
+          readOnly: true
+        description:
+          type: string
+        sports:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                readOnly: true
+              sport_name:
+                type: string
+                maxLength: 150
+              sport_slug:
+                type: string
+                maxLength: 160
+                pattern: ^[-a-zA-Z0-9_]+$
+            required:
+            - sport_name
+            - sport_slug
+          readOnly: true
+        covering:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            covering_name:
+              type: string
+              maxLength: 150
+            covering_slug:
+              type: string
+              maxLength: 160
+              pattern: ^[-a-zA-Z0-9_]+$
+          required:
+          - covering_name
+          - covering_slug
+          readOnly: true
+        shower:
+          type: boolean
+        changing_rooms:
+          type: boolean
+        lighting:
+          type: boolean
+        parking:
+          type: boolean
+        stands:
+          type: integer
+        playground_slug:
+          type: string
+          maxLength: 160
+          pattern: ^[-a-zA-Z0-9_]+$
+        images:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                readOnly: true
+              image:
+                type: string
+                format: binary
+              main_image:
+                type: boolean
+              description_image:
+                type: string
+                maxLength: 100
+            required:
+            - image
+          readOnly: true
+        draft:
+          type: boolean
+        inventories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                readOnly: true
+              inventory_name:
+                type: string
+                maxLength: 150
+              inventory_price:
+                type: string
+                format: decimal
+                multipleOf: 0.01
+                maximum: 1000
+                minimum: -1000
+            required:
+            - inventory_name
+          readOnly: true
+      required:
+      - playground_name
+      - playground_type
+      - size
+      - address
+      - playground_slug
+    UserRead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          maxLength: 250
+        phone:
+          type: integer
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+      required:
+      - email
+      - phone
+      - first_name
+      - last_name
+    PlaygroundWrite:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        playground_name:
+          type: string
+          maxLength: 150
+        playground_type:
+          enum:
+          - Indoor
+          - Outdoor
+          type: string
+        size:
+          type: string
+          maxLength: 50
+        playground_price:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 100000
+          minimum: -100000
+        address:
+          type: string
+          maxLength: 150
+        owner:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            email:
+              type: string
+              format: email
+              maxLength: 250
+            phone:
+              type: integer
+            first_name:
+              type: string
+              maxLength: 150
+            last_name:
+              type: string
+              maxLength: 150
+          required:
+          - email
+          - phone
+          - first_name
+          - last_name
+          readOnly: true
+        description:
+          type: string
+        sports:
+          type: array
+          items:
+            type: integer
+        covering:
+          type: integer
+        shower:
+          type: boolean
+        changing_rooms:
+          type: boolean
+        lighting:
+          type: boolean
+        parking:
+          type: boolean
+        stands:
+          type: integer
+        playground_slug:
+          type: string
+          maxLength: 160
+          pattern: ^[-a-zA-Z0-9_]+$
+        images:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                readOnly: true
+              image:
+                type: string
+                format: binary
+              main_image:
+                type: boolean
+              description_image:
+                type: string
+                maxLength: 100
+            required:
+            - image
+        draft:
+          type: boolean
+        inventories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                readOnly: true
+              inventory_name:
+                type: string
+                maxLength: 150
+              inventory_price:
+                type: string
+                format: decimal
+                multipleOf: 0.01
+                maximum: 1000
+                minimum: -1000
+            required:
+            - inventory_name
+      required:
+      - playground_name
+      - playground_type
+      - size
+      - address
+      - sports
+      - covering
+      - playground_slug
+    UserReg:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 250
+        phone:
+          type: integer
+        password:
+          type: string
+          writeOnly: true
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+      required:
+      - email
+      - phone
+      - password
+      - first_name
+      - last_name
+    Activation:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - uid
+      - token
+    SendEmailReset:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    PasswordResetConfirm:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+        new_password:
+          type: string
+      required:
+      - uid
+      - token
+      - new_password
+    UsernameResetConfirm:
+      type: object
+      properties:
+        new_email:
+          type: string
+          format: email
+          maxLength: 250
+      required:
+      - new_email
+    SetPassword:
+      type: object
+      properties:
+        new_password:
+          type: string
+        current_password:
+          type: string
+      required:
+      - new_password
+      - current_password
+    SetUsername:
+      type: object
+      properties:
+        current_password:
+          type: string
+        new_email:
+          type: string
+          format: email
+          maxLength: 250
+      required:
+      - current_password
+      - new_email
+    TokenCreate:
+      type: object
+      properties:
+        password:
+          type: string
+        email:
+          type: string

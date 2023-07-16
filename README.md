@@ -1,4 +1,4 @@
-# booking_sports
+<h1 align="center">Booking Playground</h1>
 
 ## Tech stack
 1. Python 3.9.16
