@@ -1,0 +1,19 @@
+sport_name,sport_slug
+Футбол,football
+Баскетбол,basketball
+Волейбол,volleyball
+Гандбол,handball
+Теннис,tennis
+Сквош,squash
+Единоборство,single_combat
+Танцы,dancing
+Йога,yoga
+Бадминтон,badminton
+Хоккей,hockey
+Пляжный волейбол,beach_volleyball
+Пляжный теннис,beach_tennis
+Настольный теннис,table_tennis
+Плавание,swimming
+Гимнастика,gymnastics
+Бильярд,billiards
+Регби,rugby
