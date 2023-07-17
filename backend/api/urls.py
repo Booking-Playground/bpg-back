@@ -1,9 +1,9 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from booking.views import SettingBookingView
-from playground.views import CoveringViewSet, SportViewSet, PlaygroundViewSet
-from users.views import CustomUserViewSet
+from api.views.booking import SettingBookingView
+from api.views.playground import CoveringViewSet, SportViewSet, PlaygroundViewSet
+from api.views.users import CustomUserViewSet
 
 v1_router = routers.DefaultRouter()
 

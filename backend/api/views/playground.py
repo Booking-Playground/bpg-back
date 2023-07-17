@@ -22,7 +22,7 @@ class PlaygroundViewSet(viewsets.ModelViewSet):
     queryset = Playground.objects.all()
 
     def get_serializer_class(self):
-        if self.request.method == 'GET':
+        if self.action == 'list' or self.action == 'retrieve':
             return PlaygroundReadSerializer
         return PlaygroundWriteSerializer
 
