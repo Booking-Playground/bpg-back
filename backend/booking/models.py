@@ -87,4 +87,4 @@ class Booking(models.Model):
         default_related_name = 'bookings'
 
     def __str__(self) -> str:
-        return f'{self.date} {self.time}'
+        return f'{self.user} - {self.date} {self.time}'

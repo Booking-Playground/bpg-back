@@ -1,10 +1,8 @@
-FROM python:3.9-slim
-
-RUN apt-get update && apt-get install -y make
+FROM python:3.9-alpine
 
 WORKDIR /app
 
-RUN pip install gunicorn==20.1.0
+RUN pip install gunicorn==21.0.1
 
 COPY requirements.production.txt .
 
@@ -12,4 +10,6 @@ RUN pip install -r requirements.production.txt --no-cache-dir
 
 COPY . .
 
-CMD ["make", "start_gunicorn"]
+RUN chmod +x entrypoint.sh
+
+CMD ["./entrypoint.sh"]
