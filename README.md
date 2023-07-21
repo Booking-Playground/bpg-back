@@ -29,15 +29,18 @@ progres...
     $ cd booking_sports
     ```
 
-3. Create environment to the example(.env.example)
-    ```sh
+3. Create environment to the example(.env.example).
+
+   For a quick start, you only need to add SECRET_KEY. Use the service [djecrety.ir](https://djecrety.ir/) (or similar) to create it.
+   ```sh
+    $ cp .env.example .env
     $ nano/vim .env
     ```
 
 4. Run
 
     ```sh
-    $ make run_dev_docker
+    $ make run_dev
    or
     $ docker compose -f docker-compose.dev.yml up
     ```
