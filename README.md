@@ -44,7 +44,9 @@ progres...
    or
     $ docker compose -f docker-compose.dev.yml up
     ```
-   
+
+## Database Schema
+![ER-schema](./docs/ER-diag.jpg)
 
 ## License
 
