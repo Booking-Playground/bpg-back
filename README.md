@@ -25,8 +25,8 @@ progres...
 2. Clone the repo
 
     ```sh
-    $ git clone https://github.com/sblvkr/booking_sports.git
-    $ cd booking_sports
+    $ git clone https://github.com/Booking-Playground/backend.git
+    $ cd backend
     ```
 
 3. Create environment to the example(.env.example).
@@ -40,7 +40,7 @@ progres...
 4. Run
 
     ```sh
-    $ make run_dev
+    $ make run
    or
     $ docker compose -f docker-compose.dev.yml up
     ```

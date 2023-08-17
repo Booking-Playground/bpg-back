@@ -2,7 +2,7 @@ import csv
 
 from django.core.management.base import BaseCommand
 
-from booking_sports.settings import BASE_DIR
+from config.settings import BASE_DIR
 from playground.models import Sport, Covering
 
 SUCCESS_IMPORT = 'Импорт файла {} завершен успешно!'
