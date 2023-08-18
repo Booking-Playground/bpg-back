@@ -7,38 +7,84 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Booking',
+            name="Booking",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField()),
-                ('time', models.TimeField()),
-                ('approved', models.BooleanField(default=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.DateField()),
+                ("time", models.TimeField()),
+                ("approved", models.BooleanField(default=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
             options={
-                'default_related_name': 'bookings',
+                "default_related_name": "bookings",
             },
         ),
         migrations.CreateModel(
-            name='SettingsBooking',
+            name="SettingsBooking",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('booking_enable', models.BooleanField(default=True)),
-                ('confirmation_required', models.BooleanField(default=True)),
-                ('disable_weekend', models.BooleanField(default=True)),
-                ('available_booking_months', models.IntegerField(default=1, help_text='number of months available for booking')),
-                ('start_time', models.TimeField(default='09:00:00')),
-                ('end_time', models.TimeField(default='17:00:00')),
-                ('period_of_each_booking', models.CharField(choices=[('5', '5M'), ('10', '10M'), ('15', '15M'), ('20', '20M'), ('25', '25M'), ('30', '30M'), ('35', '35M'), ('40', '40M'), ('45', '45M'), ('60', '1H'), ('75', '1H 15M'), ('90', '1H 30M'), ('105', '1H 45M'), ('120', '2H'), ('150', '2H 30M'), ('180', '3H')], default='30', help_text='Booking Period.', max_length=3)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("booking_enable", models.BooleanField(default=True)),
+                ("confirmation_required", models.BooleanField(default=True)),
+                ("disable_weekend", models.BooleanField(default=True)),
+                (
+                    "available_booking_months",
+                    models.IntegerField(
+                        default=1,
+                        help_text="number of months available for booking",
+                    ),
+                ),
+                ("start_time", models.TimeField(default="09:00:00")),
+                ("end_time", models.TimeField(default="17:00:00")),
+                (
+                    "period_of_each_booking",
+                    models.CharField(
+                        choices=[
+                            ("5", "5M"),
+                            ("10", "10M"),
+                            ("15", "15M"),
+                            ("20", "20M"),
+                            ("25", "25M"),
+                            ("30", "30M"),
+                            ("35", "35M"),
+                            ("40", "40M"),
+                            ("45", "45M"),
+                            ("60", "1H"),
+                            ("75", "1H 15M"),
+                            ("90", "1H 30M"),
+                            ("105", "1H 45M"),
+                            ("120", "2H"),
+                            ("150", "2H 30M"),
+                            ("180", "3H"),
+                        ],
+                        default="30",
+                        help_text="Booking Period.",
+                        max_length=3,
+                    ),
+                ),
             ],
             options={
-                'default_related_name': 'settings_playground',
+                "default_related_name": "settings_playground",
             },
         ),
     ]
