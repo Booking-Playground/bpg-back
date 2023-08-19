@@ -9,22 +9,30 @@ class UserRegSerializer(UserCreateSerializer):
     Serializer for Registration users.
     True hashing password.
     """
+
     class Meta:
         model = User
         fields = (
-            'email', 'phone', 'password',
-            'first_name', 'last_name',
+            "email",
+            "phone",
+            "password",
+            "first_name",
+            "last_name",
         )
-        extra_kwargs = {'password': {'write_only': True}}
+        extra_kwargs = {"password": {"write_only": True}}
 
 
 class UserReadSerializer(UserSerializer):
     """
     Serializer for read users in other serializer.
     """
+
     class Meta:
         fields = (
-            'id', 'email', 'phone',
-            'first_name', 'last_name',
+            "id",
+            "email",
+            "phone",
+            "first_name",
+            "last_name",
         )
         model = User

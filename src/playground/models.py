@@ -8,6 +8,7 @@ User = get_user_model()
 
 class Sport(models.Model):
     """Sport model."""
+
     sport_name = models.CharField(max_length=150)
     sport_slug = models.SlugField(max_length=160, unique=True)
 
@@ -15,11 +16,12 @@ class Sport(models.Model):
         return self.sport_name
 
     class Meta:
-        default_related_name = 'sports'
+        default_related_name = "sports"
 
 
 class Covering(models.Model):
     """Covering model."""
+
     covering_name = models.CharField(max_length=150)
     covering_slug = models.SlugField(max_length=160, unique=True)
 
@@ -27,14 +29,15 @@ class Covering(models.Model):
         return self.covering_name
 
     class Meta:
-        default_related_name = 'coverings'
+        default_related_name = "coverings"
 
 
 class Playground(models.Model):
     """Playground model."""
+
     TYPE_PLAYGROUND_CHOICES = (
-        ('Indoor', 'Indoor'),
-        ('Outdoor', 'Outdoor'),
+        ("Indoor", "Indoor"),
+        ("Outdoor", "Outdoor"),
     )
 
     playground_name = models.CharField(
@@ -83,16 +86,19 @@ class Playground(models.Model):
         return self.playground_name
 
     def get_absolute_url(self):
-        return reverse("playground_detail", kwargs={"slug": self.playground_slug})
+        return reverse(
+            "playground_detail", kwargs={"slug": self.playground_slug}
+        )
 
     class Meta:
-        default_related_name = 'playgrounds'
+        default_related_name = "playgrounds"
 
 
 class ImagePlayground(models.Model):
     """Images playground model."""
+
     description_image = models.CharField(max_length=100, blank=True)
-    image = models.ImageField(upload_to='playground_image/')
+    image = models.ImageField(upload_to="playground_image/")
     main_image = models.BooleanField(default=False)
     playground = models.ForeignKey(Playground, on_delete=models.CASCADE)
 
@@ -100,17 +106,20 @@ class ImagePlayground(models.Model):
         return self.description_image
 
     class Meta:
-        default_related_name = 'playground_images'
+        default_related_name = "playground_images"
 
 
 class Inventory(models.Model):
     """Inventory model."""
+
     inventory_name = models.CharField(max_length=150)
-    inventory_price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    inventory_price = models.DecimalField(
+        max_digits=5, decimal_places=2, default=0
+    )
     playground = models.ForeignKey(Playground, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.inventory_name
 
     class Meta:
-        default_related_name = 'inventories'
+        default_related_name = "inventories"

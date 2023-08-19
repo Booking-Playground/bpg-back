@@ -6,5 +6,5 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_filter = ('email', 'first_name')
-    empty_value_display = '-пусто-'
+    list_filter = ("email", "first_name")
+    empty_value_display = "-пусто-"

@@ -10,29 +10,43 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('playground', '0001_initial'),
+        ("playground", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='playground',
-            name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='playgrounds', to=settings.AUTH_USER_MODEL),
+            model_name="playground",
+            name="owner",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="playgrounds",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='playground',
-            name='sports',
-            field=models.ManyToManyField(related_name='playgrounds', to='playground.Sport'),
+            model_name="playground",
+            name="sports",
+            field=models.ManyToManyField(
+                related_name="playgrounds", to="playground.Sport"
+            ),
         ),
         migrations.AddField(
-            model_name='inventory',
-            name='playground',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='inventories', to='playground.playground'),
+            model_name="inventory",
+            name="playground",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="inventories",
+                to="playground.playground",
+            ),
         ),
         migrations.AddField(
-            model_name='imageplayground',
-            name='playground',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='playground_images', to='playground.playground'),
+            model_name="imageplayground",
+            name="playground",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="playground_images",
+                to="playground.playground",
+            ),
         ),
     ]

@@ -3,28 +3,25 @@ from rest_framework import serializers
 from api.serializers.fields import Base64ImageField
 from api.serializers.users import UserReadSerializer
 from booking.models import SettingsBooking
-from playground.models import (
-    Covering, Sport, Playground,
-    ImagePlayground
-)
+from playground.models import Covering, Sport, Playground, ImagePlayground
 from playground.models import Inventory
 
 
 class SportSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'sport_name', 'sport_slug')
+        fields = ("id", "sport_name", "sport_slug")
         model = Sport
 
 
 class CoveringSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'covering_name', 'covering_slug')
+        fields = ("id", "covering_name", "covering_slug")
         model = Covering
 
 
 class InventorySerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'inventory_name', 'inventory_price')
+        fields = ("id", "inventory_name", "inventory_price")
         model = Inventory
 
 
@@ -35,20 +32,23 @@ class ImageWriteSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = (
-            'id', 'image', 'main_image',
-            'description_image',
+            "id",
+            "image",
+            "main_image",
+            "description_image",
         )
         model = ImagePlayground
 
 
 class PlaygroundReadSerializer(serializers.ModelSerializer):
     owner = UserReadSerializer(
-        many=False, read_only=True,
+        many=False,
+        read_only=True,
     )
     images = ImageWriteSerializer(
         read_only=True,
         many=True,
-        source='playground_images',
+        source="playground_images",
     )
     sports = SportSerializer(
         read_only=True,
@@ -64,20 +64,31 @@ class PlaygroundReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = (
-            'id', 'playground_name', 'playground_type',
-            'size', 'playground_price', 'address',
-            'owner', 'description', 'sports', 'covering',
-            'shower', 'changing_rooms', 'lighting', 'parking',
-            'stands', 'playground_slug', 'images', 'draft',
-            'inventories',
+            "id",
+            "playground_name",
+            "playground_type",
+            "size",
+            "playground_price",
+            "address",
+            "owner",
+            "description",
+            "sports",
+            "covering",
+            "shower",
+            "changing_rooms",
+            "lighting",
+            "parking",
+            "stands",
+            "playground_slug",
+            "images",
+            "draft",
+            "inventories",
         )
         model = Playground
 
 
 class PlaygroundWriteSerializer(serializers.ModelSerializer):
-    owner = UserReadSerializer(
-        many=False, read_only=True
-    )
+    owner = UserReadSerializer(many=False, read_only=True)
     sports = serializers.PrimaryKeyRelatedField(
         many=True,
         required=True,
@@ -99,12 +110,25 @@ class PlaygroundWriteSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = (
-            'id', 'playground_name', 'playground_type',
-            'size', 'playground_price', 'address',
-            'owner', 'description', 'sports', 'covering',
-            'shower', 'changing_rooms', 'lighting', 'parking',
-            'stands', 'playground_slug', 'images', 'draft',
-            'inventories',
+            "id",
+            "playground_name",
+            "playground_type",
+            "size",
+            "playground_price",
+            "address",
+            "owner",
+            "description",
+            "sports",
+            "covering",
+            "shower",
+            "changing_rooms",
+            "lighting",
+            "parking",
+            "stands",
+            "playground_slug",
+            "images",
+            "draft",
+            "inventories",
         )
         model = Playground
 
@@ -120,9 +144,9 @@ class PlaygroundWriteSerializer(serializers.ModelSerializer):
         model.objects.bulk_create(data_list)
 
     def create(self, validated_data):
-        images = validated_data.pop('images', None)
-        inventories = validated_data.pop('inventories', None)
-        sports = validated_data.pop('sports', None)
+        images = validated_data.pop("images", None)
+        inventories = validated_data.pop("inventories", None)
+        sports = validated_data.pop("sports", None)
         playground = Playground.objects.create(**validated_data)
         if sports:
             playground.sports.set(sports)
@@ -135,9 +159,9 @@ class PlaygroundWriteSerializer(serializers.ModelSerializer):
         return playground
 
     def update(self, instance, validated_data):
-        images = validated_data.get('images')
-        inventories = validated_data.get('inventory')
-        sports = validated_data.get('sports')
+        images = validated_data.get("images")
+        inventories = validated_data.get("inventory")
+        sports = validated_data.get("sports")
         if sports:
             instance.sports.set(sports)
         if images:
@@ -151,5 +175,5 @@ class PlaygroundWriteSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         return PlaygroundReadSerializer(
-            instance, context={'request': self.context.get('request')}
+            instance, context={"request": self.context.get("request")}
         ).data
