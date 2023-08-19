@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "djoser",
-    "drf_yasg",
     "django_cleanup",
     # 3rd party
     "api.apps.ApiConfig",

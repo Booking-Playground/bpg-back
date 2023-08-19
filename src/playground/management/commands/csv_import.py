@@ -6,7 +6,7 @@ from config.settings import BASE_DIR
 from playground.models import Sport, Covering
 
 SUCCESS_IMPORT = "Импорт файла {} завершен успешно!"
-PATH = str(BASE_DIR) + "/static_backend/csv_data/"
+PATH = str(BASE_DIR) + "/data_import/"
 FILE_AND_MODEL = {
     Sport: "sports.csv",
     Covering: "coverings.csv",
