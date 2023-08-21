@@ -1,8 +1,8 @@
-FROM python:3.9-alpine
+FROM python:3.11-alpine
 
 WORKDIR /app
 
-RUN pip install gunicorn==21.0.1
+RUN pip install gunicorn==21.2.0
 
 COPY requirements.production.txt .
 
@@ -12,4 +12,4 @@ COPY . .
 
 RUN chmod +x entrypoint.sh
 
-CMD ["./entrypoint.sh"]
+CMD ["sh", "./entrypoint.sh"]

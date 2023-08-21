@@ -5,11 +5,11 @@ from django.core.management.base import BaseCommand
 from config.settings import BASE_DIR
 from playground.models import Sport, Covering
 
-SUCCESS_IMPORT = 'Импорт файла {} завершен успешно!'
-PATH = str(BASE_DIR) + '/static_backend/csv_data/'
+SUCCESS_IMPORT = "Импорт файла {} завершен успешно!"
+PATH = str(BASE_DIR) + "/data_import/"
 FILE_AND_MODEL = {
-    Sport: 'sports.csv',
-    Covering: 'coverings.csv',
+    Sport: "sports.csv",
+    Covering: "coverings.csv",
 }
 
 
@@ -28,9 +28,13 @@ class Command(BaseCommand):
     Managment command for reads csv file
     and write information in DB.
     """
+
     def handle(self, *args, **kwargs):
         for model, filename in FILE_AND_MODEL.items():
-            with open(PATH + filename, 'r', newline='', encoding='utf-8') as file:
+            with open(
+                PATH + filename, "r", newline="", encoding="utf-8"
+            ) as file:
                 csv_import(csv.DictReader(file), model)
             self.stdout.write(
-                self.style.SUCCESS(SUCCESS_IMPORT.format(filename)))
+                self.style.SUCCESS(SUCCESS_IMPORT.format(filename))
+            )

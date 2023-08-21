@@ -41,24 +41,24 @@ class SettingsBooking(models.Model):
     )
     available_booking_months = models.IntegerField(
         default=1,
-        help_text='number of months available for booking',
+        help_text="number of months available for booking",
     )
 
     start_time = models.TimeField(
-        default='09:00:00',
+        default="09:00:00",
     )
     end_time = models.TimeField(
-        default='17:00:00',
+        default="17:00:00",
     )
     period_of_each_booking = models.CharField(
         max_length=3,
-        default='30',
+        default="30",
         choices=BOOKING_PERIOD,
-        help_text='Booking Period.'
+        help_text="Booking Period.",
     )
 
     class Meta:
-        default_related_name = 'settings_playground'
+        default_related_name = "settings_playground"
 
     def __str__(self) -> str:
         return self.playground.playground_name
@@ -84,7 +84,7 @@ class Booking(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        default_related_name = 'bookings'
+        default_related_name = "bookings"
 
     def __str__(self) -> str:
-        return f'{self.user} - {self.date} {self.time}'
+        return f"{self.user} - {self.date} {self.time}"

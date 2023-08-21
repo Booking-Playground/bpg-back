@@ -1,8 +1,11 @@
 from rest_framework import viewsets
 
 from api.serializers.playground import (
-    CoveringSerializer, SportSerializer,
-    PlaygroundWriteSerializer, PlaygroundReadSerializer)
+    CoveringSerializer,
+    SportSerializer,
+    PlaygroundWriteSerializer,
+    PlaygroundReadSerializer,
+)
 from playground.models import Playground, Covering, Sport
 
 
@@ -22,7 +25,7 @@ class PlaygroundViewSet(viewsets.ModelViewSet):
     queryset = Playground.objects.all()
 
     def get_serializer_class(self):
-        if self.action == 'list' or self.action == 'retrieve':
+        if self.action == "list" or self.action == "retrieve":
             return PlaygroundReadSerializer
         return PlaygroundWriteSerializer
 
