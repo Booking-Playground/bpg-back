@@ -25,7 +25,7 @@ jobs:
         with:
           context: ./src/
           push: true
-          tags: ${{ secrets.DOCKER_USER }}/amr:latest
+          tags: ${{ secrets.DOCKER_USER }}/bpg-backend:latest
 
   deploy:
     name: Deploy from image in Docker Hub
