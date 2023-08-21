@@ -10,11 +10,13 @@ Users can book training hours online, ensuring a reliable and transparent reserv
 Its goal is to streamline the dialogue between users and sports facilities, making the booking process fast and convenient.
 
 ## Demo
-progres...
+API: [bpg.thesml.fun/api/v1/](https://bpg.thesml.fun/api/v1/)
+
+docs: [bpg.thesml.fun/api/v1/docs/](https://bpg.thesml.fun/api/v1/docs/)
 
 ## Tech stack
-1. Python 3.9.16
-2. Django 3.2.20
+1. Python 3.11
+2. Django 4.2.4
 3. DRF 3.14.0
 4. Postgres 13
 5. Nginx 1.24.0
