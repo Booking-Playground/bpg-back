@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd bpg-production
-            echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker-compose down
+            echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker compose down
             echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker rmi ${{ secrets.DOCKER_USER }}/bpg-backend
             echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker compose up -d
 
