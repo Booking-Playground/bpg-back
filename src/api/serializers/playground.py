@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from api.serializers.fields import Base64ImageField
-from api.serializers.users import UserReadSerializer
-from booking.models import SettingsBooking
-from playground.models import Covering, Sport, Playground, ImagePlayground
-from playground.models import Inventory
+from src.api.serializers.fields import Base64ImageField
+from src.api.serializers.users import UserReadSerializer
+from src.booking.models import SettingsBooking
+from src.playground.models import Covering, Sport, Playground, ImagePlayground
+from src.playground.models import Inventory
 
 
 class SportSerializer(serializers.ModelSerializer):

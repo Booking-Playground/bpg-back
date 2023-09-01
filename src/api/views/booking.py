@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.serializers.booking import SettingsBookingSerializer
-from playground.models import Playground
+from src.api.serializers.booking import SettingsBookingSerializer
+from src.playground.models import Playground
 
 
 class SettingBookingView(APIView):

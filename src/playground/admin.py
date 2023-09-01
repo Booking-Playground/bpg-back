@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from playground.models import *
+from src.playground.models import *
 
 admin.site.register(Sport)
 admin.site.register(Inventory)

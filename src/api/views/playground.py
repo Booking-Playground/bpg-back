@@ -1,12 +1,12 @@
 from rest_framework import viewsets
 
-from api.serializers.playground import (
+from src.api.serializers.playground import (
     CoveringSerializer,
     SportSerializer,
     PlaygroundWriteSerializer,
     PlaygroundReadSerializer,
 )
-from playground.models import Playground, Covering, Sport
+from src.playground.models import Playground, Covering, Sport
 
 
 class SportViewSet(viewsets.ReadOnlyModelViewSet):

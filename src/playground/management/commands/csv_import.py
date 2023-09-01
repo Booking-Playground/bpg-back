@@ -2,8 +2,8 @@ import csv
 
 from django.core.management.base import BaseCommand
 
-from config.settings import BASE_DIR
-from playground.models import Sport, Covering
+from src.config.settings import BASE_DIR
+from src.playground.models import Sport, Covering
 
 SUCCESS_IMPORT = "Импорт файла {} завершен успешно!"
 PATH = str(BASE_DIR) + "/data_import/"

@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from playground.models import Playground
+from src.playground.models import Playground
 
 User = get_user_model()
 

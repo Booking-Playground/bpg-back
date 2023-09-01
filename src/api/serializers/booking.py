@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from booking.models import SettingsBooking
+from src.booking.models import SettingsBooking
 
 
 class SettingsBookingSerializer(serializers.ModelSerializer):
