@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "djoser",
     "django_cleanup",
+    "phonenumber_field",
     # 3rd party
     "api.apps.ApiConfig",
     "booking.apps.BookingConfig",
