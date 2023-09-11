@@ -2,12 +2,15 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from drf_spectacular.utils import extend_schema
 
 from api.serializers.booking import SettingsBookingSerializer
 from playground.models import Playground
 
 
+@extend_schema(tags=["Playgrounds"])
 class SettingBookingView(APIView):
+    @extend_schema(summary="Get Settings booking playground")
     def get(self, request, playground_id):
         settings = get_object_or_404(
             Playground,
@@ -19,6 +22,7 @@ class SettingBookingView(APIView):
             status=status.HTTP_200_OK,
         )
 
+    @extend_schema(summary="Update Settings booking playground")
     def patch(self, request, playground_id):
         settings = get_object_or_404(
             Playground,
