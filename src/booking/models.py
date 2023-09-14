@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
+from core.choices_classes import BookingStatusOptions
 from playground.models import Playground
 
 User = get_user_model()
@@ -78,7 +80,11 @@ class Booking(models.Model):
 
     date = models.DateField()
     time = models.TimeField()
-    approved = models.BooleanField(default=False)
+    status = models.IntegerField(
+        verbose_name="Статусы резервирования",
+        choices=BookingStatusOptions.choices,
+        default=BookingStatusOptions.CREATED,
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

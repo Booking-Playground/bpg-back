@@ -25,16 +25,22 @@ class ReadBookingSerializer(serializers.ModelSerializer):
         many=False,
         read_only=True,
     )
+    playground = serializers.StringRelatedField(many=False, read_only=True)
+    status = serializers.SerializerMethodField(method_name="get_status")
 
     class Meta:
         fields = (
             "id",
+            "status",
             "user",
             "playground",
             "date",
             "time",
         )
         model = Booking
+
+    def get_status(self, obj):
+        return obj.get_status_display()
 
 
 class WriteBookingSerializer(serializers.ModelSerializer):
@@ -49,7 +55,6 @@ class WriteBookingSerializer(serializers.ModelSerializer):
             "playground",
             "date",
             "time",
-            "approved",
             "created_at",
             "updated_at",
         )

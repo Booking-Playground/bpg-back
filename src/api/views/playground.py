@@ -1,9 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
+from api.permissions import IsOwner
 from api.serializers.booking import (
     WriteBookingSerializer,
     ReadBookingSerializer,
@@ -15,7 +17,10 @@ from api.serializers.playground import (
     PlaygroundReadSerializer,
 )
 from booking.models import Booking
+from core.choices_classes import BookingStatusOptions
 from playground.models import Playground, Covering, Sport
+
+User = get_user_model()
 
 
 class SportViewSet(viewsets.ReadOnlyModelViewSet):
@@ -42,9 +47,18 @@ class PlaygroundViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
-class BookingPlaygroundViewSet(
-    mixins.CreateModelMixin, viewsets.GenericViewSet
+class GetOwnerCreateUserBookingPlaygroundViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet,
 ):
+    """
+    Создание бронирования площадки для пользователя.
+    Метод: [POST],
+    Эндпоинт: playgrounds/{id}/bookings/.
+    """
+
     serializer_class = WriteBookingSerializer
 
     def get_queryset(self):
@@ -54,8 +68,20 @@ class BookingPlaygroundViewSet(
         serializer.save(user=self.request.user)
 
 
-class BookingViewSet(viewsets.ModelViewSet):
-    http_method_names = ("get", "post")
+class GetOrCancelBookingUserViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet,
+):
+    """
+    Получение информации:
+    о всех бронированиях, конкретного пользователя,
+    об {id} бронировании, конкретного пользователя.
+    Метод: [GET].
+    Эндпоинты: bookings/, bookings/{id}/.
+    """
+
     serializer_class = ReadBookingSerializer
 
     def get_queryset(self):
@@ -75,11 +101,14 @@ class BookingViewSet(viewsets.ModelViewSet):
     )
     def cancel(self, request, *args, **kwargs):
         """
-        Отмена резервирования пользователем.
+        Отмена {id} бронирования конкретным пользователем.
+        Метод: [POST].
+        Эндпоинт: bookings/{id}/cancel/.
         """
         booking = get_object_or_404(Booking, pk=kwargs["pk"])
         self.check_object_permissions(self.request, booking)
-        booking.delete()
+        booking.status = BookingStatusOptions.CANCELLED
+        booking.save()
         return Response(
             {"message": f"Резерв успешно отменен!"},
             status=status.HTTP_204_NO_CONTENT,
