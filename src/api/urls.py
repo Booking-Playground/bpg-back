@@ -2,7 +2,7 @@ from django.urls import include, path
 from rest_framework import routers
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 
-from api.views.booking import SettingBookingView
+from api.views.booking import SettingBookingView, CreateBookingView
 from api.views.playground import (
     CoveringViewSet,
     SportViewSet,
