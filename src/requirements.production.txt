@@ -5,6 +5,7 @@ django-phonenumber-field[phonenumberslite]==7.1.0
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 djoser==2.2.0
+drf-spectacular==0.26.4
 Pillow==10.0.0
 psycopg2-binary==2.9.7
 python-dotenv==0.19.0
