@@ -25,7 +25,6 @@ class ReadBookingSerializer(serializers.ModelSerializer):
         many=False,
         read_only=True,
     )
-    playground = serializers.StringRelatedField(many=False, read_only=True)
     status = serializers.SerializerMethodField(method_name="get_status")
 
     class Meta:
@@ -46,16 +45,18 @@ class ReadBookingSerializer(serializers.ModelSerializer):
 class WriteBookingSerializer(serializers.ModelSerializer):
     """Write information booking of sports grounds."""
 
-    user = UserReadSerializer(many=False, read_only=True)
+    user = UserReadSerializer(
+        many=False,
+        read_only=True,
+    )
 
     class Meta:
         fields = (
             "id",
-            "user",
             "playground",
+            "user",
             "date",
             "time",
-            "created_at",
-            "updated_at",
         )
+        read_only_fields = ("id", "playground")
         model = Booking
