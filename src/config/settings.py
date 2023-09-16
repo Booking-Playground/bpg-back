@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "djoser",
     "django_cleanup",
+    "phonenumber_field",
+    "drf_spectacular",
     # 3rd party
     "api.apps.ApiConfig",
     "booking.apps.BookingConfig",
@@ -104,6 +106,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 DJOSER = {
@@ -136,3 +139,10 @@ MEDIA_ROOT = BASE_DIR / "media_backend"
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Booking Playground API",
+    "DESCRIPTION": "API Documentation for BPG systems",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}

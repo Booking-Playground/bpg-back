@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 USER = "user"
 OWNER = "owner"
@@ -41,7 +42,10 @@ class User(AbstractUser):
         max_length=250,
         unique=True,
     )
-    phone = models.PositiveIntegerField(
+    phone = PhoneNumberField(
+        max_length=16,
+        blank=False,
+        null=False,
         unique=True,
     )
     first_name = models.CharField(
