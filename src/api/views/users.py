@@ -8,7 +8,7 @@ from api.serializers.playground import UserReadSerializer
 User = get_user_model()
 
 
-@extend_schema(tags=["Users"])
-class CustomUserViewSet(UserViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserReadSerializer
+# @extend_schema(tags=["Users"])
+# class CustomUserViewSet(UserViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserReadSerializer

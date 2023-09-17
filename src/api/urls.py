@@ -8,7 +8,6 @@ from api.views.playground import (
     SportViewSet,
     PlaygroundViewSet,
 )
-from api.views.users import CustomUserViewSet
 
 v1_router = routers.DefaultRouter()
 
@@ -19,7 +18,7 @@ v1_router.register("playgrounds", PlaygroundViewSet, basename="playground")
 #     r'bookings/(?P<playground_slug>\d+)',
 #     BookingViewSet, basename='booking',
 # )
-v1_router.register("users", CustomUserViewSet, basename="users")
+# v1_router.register("users", CustomUserViewSet, basename="users")
 
 
 urlpatterns = [
@@ -34,5 +33,7 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="docs",
     ),
+    # path('accounts/', include('allauth.urls')),
+    path("auth/registration/", include("dj_rest_auth.registration.urls")),
     path("auth/", include("dj_rest_auth.urls")),
 ]

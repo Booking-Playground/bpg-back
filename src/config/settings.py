@@ -1,3 +1,4 @@
+import datetime
 import os
 from pathlib import Path
 
@@ -19,11 +20,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "rest_framework",
     "rest_framework.authtoken",
     # 3rd party
     "dj_rest_auth",
-    "djoser",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     "django_cleanup",
     "phonenumber_field",
     "drf_spectacular",
@@ -42,6 +46,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -99,6 +104,7 @@ USE_I18N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = "users.User"
+ACCOUNT_ADAPTER = "users.adapter.CustomAccountAdapter"
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
@@ -111,6 +117,7 @@ REST_FRAMEWORK = {
 }
 
 REST_AUTH = {
+    "REGISTER_SERIALIZER": "api.serializers.users.CustomRegisterSerializer",
     "LOGIN_SERIALIZER": "api.serializers.users.CustomLoginSerializer",
     "USER_DETAILS_SERIALIZER": "api.serializers.users.CustomUserDetailsSerializer",
     "SESSION_LOGIN": False,
@@ -119,23 +126,23 @@ REST_AUTH = {
     "JWT_AUTH_REFRESH_COOKIE": "bpg-refresh",
 }
 
-DJOSER = {
-    "LOGIN_FIELD": "email",
-    "SERIALIZERS": {
-        "user": "api.serializers.users.UserReadSerializer",
-        "current_user": "api.serializers.users.UserReadSerializer",
-        "user_create": "api.serializers.users.UserRegSerializer",
-    },
-    "PERMISSIONS": {
-        "user": ("rest_framework.permissions.IsAuthenticated",),
-        "user_list": ("rest_framework.permissions.AllowAny",),
-        "password_reset": ("rest_framework.permissions.AllowAny",),
-        "password_reset_confirm": ("rest_framework.permissions.AllowAny",),
-        "set_password": ("rest_framework.permissions.IsAuthenticated",),
-    },
-    "HIDE_USERS": True,
-    "PASSWORD_RESET_CONFIRM_URL": "api/v1/users/reset_password_confirm/{uid}/{token}",
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+
+JWT_AUTH = {
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(days=7),
+    # 'JWT_ALLOW_REFRESH': True,
 }
+
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
     EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
