@@ -34,5 +34,5 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="docs",
     ),
-    path("v1/auth/", include("djoser.urls.authtoken")),
+    path("auth/", include("dj_rest_auth.urls")),
 ]

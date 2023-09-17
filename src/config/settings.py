@@ -9,7 +9,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
-POSTGRES = os.getenv("POSTGRES", "false").lower() == "true"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1, localhost").split(", ")
 
@@ -22,11 +21,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework.authtoken",
+    # 3rd party
+    "dj_rest_auth",
     "djoser",
     "django_cleanup",
     "phonenumber_field",
     "drf_spectacular",
-    # 3rd party
+    # local
     "api.apps.ApiConfig",
     "booking.apps.BookingConfig",
     "playground.apps.PlaygroundConfig",
@@ -104,9 +105,18 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+REST_AUTH = {
+    "LOGIN_SERIALIZER": "api.serializers.users.CustomLoginSerializer",
+    "USER_DETAILS_SERIALIZER": "api.serializers.users.CustomUserDetailsSerializer",
+    "SESSION_LOGIN": False,
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "bpg-token",
+    "JWT_AUTH_REFRESH_COOKIE": "bpg-refresh",
 }
 
 DJOSER = {
@@ -123,7 +133,7 @@ DJOSER = {
         "password_reset_confirm": ("rest_framework.permissions.AllowAny",),
         "set_password": ("rest_framework.permissions.IsAuthenticated",),
     },
-    "HIDE_USERS": False,
+    "HIDE_USERS": True,
     "PASSWORD_RESET_CONFIRM_URL": "api/v1/users/reset_password_confirm/{uid}/{token}",
 }
 if DEBUG:

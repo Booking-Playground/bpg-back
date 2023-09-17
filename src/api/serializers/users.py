@@ -1,3 +1,4 @@
+from dj_rest_auth.serializers import LoginSerializer, UserDetailsSerializer
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer, UserSerializer
 
@@ -36,3 +37,14 @@ class UserReadSerializer(UserSerializer):
             "last_name",
         )
         model = User
+
+
+class CustomLoginSerializer(LoginSerializer):
+    username = None
+
+
+class CustomUserDetailsSerializer(
+    UserReadSerializer,
+    UserDetailsSerializer,
+):
+    pass
