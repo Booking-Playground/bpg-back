@@ -25,6 +25,7 @@ class CustomRegisterSerializer(RegisterSerializer):
     def get_cleaned_data(self):
         data_dict = super().get_cleaned_data()
         data_dict["phone"] = self.validated_data.get("phone", "")
+        data_dict["email"] = self.validated_data.get("email", "")
         data_dict["first_name"] = self.validated_data.get("first_name", "")
         data_dict["last_name"] = self.validated_data.get("last_name", "")
         return data_dict
@@ -47,5 +48,5 @@ class CustomUserDetailsSerializer(serializers.ModelSerializer):
             "last_name",
             "phone",
             "email",
+            "role",
         )
-        read_only_fields = ("email",)

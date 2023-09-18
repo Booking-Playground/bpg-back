@@ -1,3 +1,4 @@
+from allauth.account.views import ConfirmEmailView
 from django.urls import include, path
 from rest_framework import routers
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
@@ -32,6 +33,12 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="docs",
     ),
-    path("auth/registration/", include("dj_rest_auth.registration.urls")),
-    path("auth/", include("dj_rest_auth.urls")),
+    # users and auth
+    path(
+        "v1/auth/registration/account-confirm-email/<str:key>/",
+        ConfirmEmailView.as_view(),
+        name="account_confirm_email",
+    ),
+    path("v1/auth/registration/", include("dj_rest_auth.registration.urls")),
+    path("v1/auth/", include("dj_rest_auth.urls")),
 ]

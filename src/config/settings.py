@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "dj_rest_auth.registration",
     "django_cleanup",
     "phonenumber_field",
     "drf_spectacular",
@@ -133,10 +134,16 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_CHANGE_EMAIL = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+
+LOGIN_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
