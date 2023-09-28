@@ -177,3 +177,17 @@ class PlaygroundWriteSerializer(serializers.ModelSerializer):
         return PlaygroundReadSerializer(
             instance, context={"request": self.context.get("request")}
         ).data
+
+
+class SmallPlaygroundSerializer(serializers.ModelSerializer):
+    owner = serializers.StringRelatedField(many=False, read_only=True)
+
+    class Meta:
+        fields = (
+            "id",
+            "playground_name",
+            "address",
+            "owner",
+            "playground_slug",
+        )
+        model = Playground

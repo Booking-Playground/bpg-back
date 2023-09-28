@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from booking.models import Booking, SettingsBooking
+from api.serializers.playground import SmallPlaygroundSerializer
 from api.serializers.users import UserReadSerializer
 
 
@@ -26,6 +27,10 @@ class ReadBookingSerializer(serializers.ModelSerializer):
         read_only=True,
     )
     status = serializers.SerializerMethodField(method_name="get_status")
+    playground = SmallPlaygroundSerializer(
+        many=False,
+        read_only=True,
+    )
 
     class Meta:
         fields = (
@@ -49,6 +54,10 @@ class WriteBookingSerializer(serializers.ModelSerializer):
         many=False,
         read_only=True,
     )
+    playground = SmallPlaygroundSerializer(
+        many=False,
+        read_only=True,
+    )
 
     class Meta:
         fields = (
@@ -58,5 +67,5 @@ class WriteBookingSerializer(serializers.ModelSerializer):
             "date",
             "time",
         )
-        read_only_fields = ("id", "playground")
+        read_only_fields = ("id",)
         model = Booking
