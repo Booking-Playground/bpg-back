@@ -1,4 +1,5 @@
 from allauth.account.views import ConfirmEmailView
+from dj_rest_auth.views import PasswordResetConfirmView
 from django.urls import include, path
 from rest_framework import routers
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
@@ -40,5 +41,10 @@ urlpatterns = [
         name="account_confirm_email",
     ),
     path("v1/auth/registration/", include("dj_rest_auth.registration.urls")),
+    path(
+        "v1/auth/password/reset/confirm/<str:uidb64>/<str:token>",
+        PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
     path("v1/auth/", include("dj_rest_auth.urls")),
 ]
