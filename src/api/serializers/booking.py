@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from booking.models import Booking, SettingsBooking
 from api.serializers.playground import SmallPlaygroundSerializer
-from api.serializers.users import UserReadSerializer
+from api.serializers.users import CustomUserDetailsSerializer
 
 
 class SettingsBookingSerializer(serializers.ModelSerializer):
@@ -22,7 +22,7 @@ class SettingsBookingSerializer(serializers.ModelSerializer):
 class ReadBookingSerializer(serializers.ModelSerializer):
     """Read information booking of sports grounds."""
 
-    user = UserReadSerializer(
+    user = CustomUserDetailsSerializer(
         many=False,
         read_only=True,
     )
@@ -50,7 +50,7 @@ class ReadBookingSerializer(serializers.ModelSerializer):
 class WriteBookingSerializer(serializers.ModelSerializer):
     """Write information booking of sports grounds."""
 
-    user = UserReadSerializer(
+    user = CustomUserDetailsSerializer(
         many=False,
         read_only=True,
     )

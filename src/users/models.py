@@ -61,6 +61,7 @@ class User(AbstractUser):
         blank=True,
     )
     USERNAME_FIELD = "email"
+    EMAIL_FIELD = "email"
     REQUIRED_FIELDS = (
         "phone",
         "first_name",

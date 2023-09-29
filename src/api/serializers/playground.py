@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from api.serializers.fields import Base64ImageField
-from api.serializers.users import UserReadSerializer
+from api.serializers.users import CustomUserDetailsSerializer
 from booking.models import SettingsBooking
 from playground.models import Covering, Sport, Playground, ImagePlayground
 from playground.models import Inventory
@@ -41,7 +41,7 @@ class ImageWriteSerializer(serializers.ModelSerializer):
 
 
 class PlaygroundReadSerializer(serializers.ModelSerializer):
-    owner = UserReadSerializer(
+    owner = CustomUserDetailsSerializer(
         many=False,
         read_only=True,
     )
@@ -88,7 +88,7 @@ class PlaygroundReadSerializer(serializers.ModelSerializer):
 
 
 class PlaygroundWriteSerializer(serializers.ModelSerializer):
-    owner = UserReadSerializer(many=False, read_only=True)
+    owner = CustomUserDetailsSerializer(many=False, read_only=True)
     sports = serializers.PrimaryKeyRelatedField(
         many=True,
         required=True,

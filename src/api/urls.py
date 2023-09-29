@@ -1,3 +1,5 @@
+from allauth.account.views import ConfirmEmailView
+from dj_rest_auth.views import PasswordResetConfirmView
 from django.urls import include, path
 from rest_framework import routers
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
@@ -14,7 +16,6 @@ from api.views.playground import (
     SportViewSet,
     PlaygroundViewSet,
 )
-from api.views.users import CustomUserViewSet
 
 v1_router = routers.DefaultRouter()
 
@@ -26,7 +27,6 @@ v1_router.register("bookings", ListRetrieveBookingViewSet, basename="booking")
 #     r'bookings/(?P<playground_slug>\d+)',
 #     BookingViewSet, basename='booking',
 # )
-v1_router.register("users", CustomUserViewSet, basename="users")
 
 
 urlpatterns = [
@@ -54,4 +54,17 @@ urlpatterns = [
         ApproveBookingAPIView.as_view(),
     ),
     path("v1/auth/", include("djoser.urls.authtoken")),
+    # users and auth
+    path(
+        "v1/auth/registration/account-confirm-email/<str:key>/",
+        ConfirmEmailView.as_view(),
+        name="account_confirm_email",
+    ),
+    path("v1/auth/registration/", include("dj_rest_auth.registration.urls")),
+    path(
+        "v1/auth/password/reset/confirm/<str:uidb64>/<str:token>",
+        PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
+    path("v1/auth/", include("dj_rest_auth.urls")),
 ]
