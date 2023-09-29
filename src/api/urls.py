@@ -53,7 +53,6 @@ urlpatterns = [
         "v1/bookings/<int:booking_id>/approve/",
         ApproveBookingAPIView.as_view(),
     ),
-    path("v1/auth/", include("djoser.urls.authtoken")),
     # users and auth
     path(
         "v1/auth/registration/account-confirm-email/<str:key>/",
