@@ -9,6 +9,7 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         user.first_name = data.get("first_name")
         user.last_name = data.get("last_name")
         user.phone = data.get("phone")
+        user.role = data.get("role")
 
         if "password1" in data:
             user.set_password(data["password1"])

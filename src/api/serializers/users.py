@@ -5,6 +5,8 @@ from phonenumber_field.serializerfields import PhoneNumberField
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
+from users.models import ROLE_CHOICES
+
 User = get_user_model()
 
 
@@ -21,6 +23,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         max_length=16,
         validators=[UniqueValidator(queryset=User.objects.all())],
     )
+    role = serializers.ChoiceField(required=True, choices=ROLE_CHOICES)
 
     def get_cleaned_data(self):
         data_dict = super().get_cleaned_data()
@@ -28,6 +31,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         data_dict["email"] = self.validated_data.get("email", "")
         data_dict["first_name"] = self.validated_data.get("first_name", "")
         data_dict["last_name"] = self.validated_data.get("last_name", "")
+        data_dict["role"] = self.validated_data.get("role", "")
         return data_dict
 
 
