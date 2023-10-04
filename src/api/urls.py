@@ -4,7 +4,13 @@ from django.urls import include, path
 from rest_framework import routers
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 
-from api.views.booking import SettingBookingView
+from api.views.booking import (
+    ApproveBookingAPIView,
+    CancelBookingAPIView,
+    CreateBookingView,
+    ListRetrieveBookingViewSet,
+    SettingBookingView,
+)
 from api.views.playground import (
     CoveringViewSet,
     SportViewSet,
@@ -16,6 +22,7 @@ v1_router = routers.DefaultRouter()
 v1_router.register("sports", SportViewSet, basename="sport")
 v1_router.register("coverings", CoveringViewSet, basename="covering")
 v1_router.register("playgrounds", PlaygroundViewSet, basename="playground")
+v1_router.register("bookings", ListRetrieveBookingViewSet, basename="booking")
 # v1_router.register(
 #     r'bookings/(?P<playground_slug>\d+)',
 #     BookingViewSet, basename='booking',
@@ -33,6 +40,18 @@ urlpatterns = [
         "v1/docs/",
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="docs",
+    ),
+    path(
+        "v1/playgrounds/<int:playground_id>/bookings/",
+        CreateBookingView.as_view(),
+    ),
+    path(
+        "v1/bookings/<int:booking_id>/cancel/",
+        CancelBookingAPIView.as_view(),
+    ),
+    path(
+        "v1/bookings/<int:booking_id>/approve/",
+        ApproveBookingAPIView.as_view(),
     ),
     # users and auth
     path(

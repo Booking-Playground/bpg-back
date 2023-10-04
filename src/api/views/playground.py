@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
@@ -8,6 +9,8 @@ from api.serializers.playground import (
     PlaygroundReadSerializer,
 )
 from playground.models import Playground, Covering, Sport
+
+User = get_user_model()
 
 
 @extend_schema(tags=["Sports"])
