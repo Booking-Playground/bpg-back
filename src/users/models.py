@@ -14,9 +14,6 @@ ROLE_CHOICES = (
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
-        """
-        Создает и сохраняет пользователя с указанным email и паролем.
-        """
         if not email:
             raise ValueError("The Email field must be set")
         email = self.normalize_email(email)
@@ -26,9 +23,6 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
-        """
-        Создает и сохраняет суперпользователя с указанным email и паролем.
-        """
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         return self.create_user(email, password, **extra_fields)
@@ -58,7 +52,7 @@ class User(AbstractUser):
         max_length=max(len(role) for role, _ in ROLE_CHOICES),
         choices=ROLE_CHOICES,
         default=USER,
-        blank=True,
+        blank=False,
     )
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
@@ -84,4 +78,4 @@ class User(AbstractUser):
         default_related_name = "users"
 
     def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name} ({self.email})"
+        return f"{self.first_name} {self.last_name} ({self.email}) | id: {self.pk}"
